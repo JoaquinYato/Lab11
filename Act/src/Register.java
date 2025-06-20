@@ -13,5 +13,4 @@ public class Register {
     public String toString({
         return "(" + jey + ", " +name+ ")";
     })
-
 }
