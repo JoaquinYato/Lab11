@@ -1,8 +1,8 @@
 import java.util.LinkedList;
 
 public class HashO {
-    private LinkedList<Register>[] table;
-    private int size;
+    LinkedList<Register>[] table;
+    int size;
 
     public HashO(int size){
         this.size=size;
