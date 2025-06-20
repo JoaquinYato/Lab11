@@ -1,5 +1,5 @@
 public class Register {
-    private in key;
+    private int key;
     private String name;
 
     public Register(int key, String name){
@@ -9,8 +9,8 @@ public class Register {
 
     public int getKey(){return key;}
 
-    public String getName){return name;}
-    public String toString({
-        return "(" + jey + ", " +name+ ")";
-    })
+    public String getName(){return name;}
+    public String toString(){
+        return "(" + key + ", " +name+ ")";
+    }
 }

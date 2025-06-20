@@ -37,7 +37,7 @@ public class HashC {
                 return;
             }
             index = hash(index+1);
-        } while (index != originalIndex);
+        } while (index != indexpOri);
     }
 
     public Register search(int key){
@@ -49,7 +49,7 @@ public class HashC {
                 return table[index].register;
             }
             index = hash(index+1);
-        } while (index != originalIndex && table[index].register != null);
+        } while (index != indexpOri && table[index].register != null);
 
         return null;
     }
@@ -64,7 +64,7 @@ public class HashC {
                 return;
             }
             index = hash(index+1);
-        } while (index != originalIndex && table[index].register != null);
+        } while (index != indexpOri && table[index].register != null);
     }
 
     public void printTable(){
