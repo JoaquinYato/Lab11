@@ -1,11 +1,11 @@
 public class HashC {
-    private stacj class Element{
+    private static class Element{
         Register register;
-        boolean isAvaliable;
+        boolean isAvailable ;
 
         public Element(){
             this.register=null;
-            this.isAvaliable=null;
+            this.isAvailable =true;
         }
     }
 
@@ -30,52 +30,41 @@ public class HashC {
         int index = hash(key);
         int indexpOri = index;
 
-        while(!table[index].isAvaliable){
-            index = hash(index+1);
-
-            if(indexpOri == index){
-                System.out.println("Tabla llena");
+        do {
+            if (table[index].isAvailable) {
+                table[index].register = reg;
+                table[index].isAvailable = false;
                 return;
             }
-        }
-
-        table[index].register = reg;
-        table[index].isAvaliable = false
+            index = hash(index+1);
+        } while (index != originalIndex);
     }
 
     public Register search(int key){
         int index = hash(key);
         int indexpOri = index;
 
-        while (table[index].register != null){
-            if(table[index].register.getKey() == key && !table[index].isAvaliable){
+        do {
+            if (table[index].register != null && table[index].register.getKey() == key && !table[index].isAvailable) {
                 return table[index].register;
             }
-            index=hash(index+1);
+            index = hash(index+1);
+        } while (index != originalIndex && table[index].register != null);
 
-            if (indexpOri == index){
-                break;
-            }
-        }
-        return null
+        return null;
     }
 
     public void delete(int key){
         int index = hash(key);
         int indexpOri = index;
 
-        while (table[index].register != null){
-            if(table[index].register.getKey() == key && !table[index].isAvaliable){
-                table[index].isAvaliable = true;
+        do {
+            if (table[index].register != null && table[index].register.getKey() == key && !table[index].isAvailable) {
+                table[index].isAvailable = true;
                 return;
             }
-
             index = hash(index+1);
-
-            if(indexpOri == index){
-                break;
-            }
-        }
+        } while (index != originalIndex && table[index].register != null);
     }
 
     public void printTable(){
