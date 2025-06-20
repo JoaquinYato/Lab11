@@ -13,4 +13,6 @@ public class Register {
     public String toString(){
         return "(" + key + ", " +name+ ")";
     }
+
+    public String getData() {return name;}
 }

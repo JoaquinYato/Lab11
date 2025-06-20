@@ -1,5 +1,5 @@
 public class HashC {
-    private static class Element{
+    static class Element{
         Register register;
         boolean isAvailable ;
 
@@ -9,8 +9,8 @@ public class HashC {
         }
     }
 
-    private Element[] table;
-    private int size;
+    Element[] table;
+    int size;
 
     public HashC(int size){
         table= new Element[size];
