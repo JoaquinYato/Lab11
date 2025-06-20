@@ -17,7 +17,7 @@ public class HashO {
         return key%size;
     }
 
-    private void insert(Register reg){
+    public void insert(Register reg){
         int index = hash(reg.getKey());
 
         for(Register r : table[index]){
