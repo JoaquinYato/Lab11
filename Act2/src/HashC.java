@@ -1,11 +1,11 @@
 public class HashC {
     static class Element{
         Register register;
-        boolean isAvailable ;
+        int isAvailable ;
 
         public Element(){
             this.register=null;
-            this.isAvailable =true;
+            this.isAvailable =0;
         }
     }
 
@@ -31,9 +31,9 @@ public class HashC {
         int indexpOri = index;
 
         do {
-            if (table[index].isAvailable) {
+            if (table[index].isAvailable == 0 || table[index].isAvailable == -1) {
                 table[index].register = reg;
-                table[index].isAvailable = false;
+                table[index].isAvailable = 1;
                 return;
             }
             index = hash(index+1);
@@ -45,7 +45,7 @@ public class HashC {
         int indexpOri = index;
 
         do {
-            if (table[index].register != null && table[index].register.getKey() == key && !table[index].isAvailable) {
+            if (table[index].register != null && table[index].register.getKey() == key && table[index].isAvailable == 1) {
                 return table[index].register;
             }
             index = hash(index+1);
@@ -59,8 +59,8 @@ public class HashC {
         int indexpOri = index;
 
         do {
-            if (table[index].register != null && table[index].register.getKey() == key && !table[index].isAvailable) {
-                table[index].isAvailable = true;
+            if (table[index].register != null && table[index].register.getKey() == key && table[index].isAvailable==1) {
+                table[index].isAvailable = -1;
                 return;
             }
             index = hash(index+1);
@@ -78,7 +78,7 @@ public class HashC {
             if (table[i].register == null) {
                 System.out.println("    SI     |   -   |   -   ");
             } else {
-                String disponible = table[i].isAvailable ? "SI" : "NO";
+                String disponible = table[i].isAvailable == 0 ? "SI" : "NO";
                 System.out.println(String.format("    %s     | %5d | %s",
                         disponible,
                         table[i].register.getKey(),

@@ -95,7 +95,7 @@ public class InterfazHashC extends JFrame {
             if (elem.register == null) {
                 sb.append("    SI     |   -   |   -\n");
             } else {
-                String disponible = elem.isAvailable ? "SI" : "NO";
+                String disponible = elem.isAvailable == 0 || elem.isAvailable == -1? "SI" : "NO";
                 sb.append(String.format("    %s     | %5d | %s\n",
                         disponible,
                         elem.register.getKey(),
