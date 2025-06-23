@@ -1,15 +1,13 @@
-import java.util.LinkedList;
-
 public class HashO<T> {
-    LinkedList<Register<T>>[] table;
+    ListLinked<Register<T>>[] table;
     int size;
 
     public HashO(int size){
         this.size=size;
-        this.table=new LinkedList[size];
+        this.table=new ListLinked[size];
 
         for (int i = 0; i < size; i++) {
-            table[i] = new LinkedList<>();
+            table[i] = new ListLinked<>();
         }
     }
 
@@ -27,7 +25,7 @@ public class HashO<T> {
             }
         }
 
-        table[index].add(reg);
+        table[index].agregar(reg);
     }
 
     public Register<T> search(int key){
@@ -65,7 +63,9 @@ public class HashO<T> {
             } else {
                 System.out.print("[");
                 boolean first = true;
-                for (Register reg : table[i]) {
+                ListLinked<Register<T>> lista = table[i];
+                for (int j = 0; j < lista.size(); j++) {
+                    Register<T> reg = lista.get(j);
                     if (!first) {
                         System.out.print(" -> ");
                     }

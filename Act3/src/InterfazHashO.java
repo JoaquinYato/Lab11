@@ -96,7 +96,9 @@ public class InterfazHashO extends JFrame {
             } else {
                 sb.append("[");
                 boolean primero = true;
-                for (Register<String> r : hash.table[i]) {
+                ListLinked<Register<String>> lista = hash.table[i];
+                for (int j = 0; j < lista.size(); j++) {
+                    Register<String> r = lista.get(j);
                     if (!primero) sb.append(" -> ");
                     sb.append("(").append(r.getKey()).append(":").append(r.getName()).append(")");
                     primero = false;

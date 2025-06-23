@@ -1,4 +1,4 @@
-public class Register<T> {
+public class Register<T> implements Comparable<Register<T>> {
     private int key;
     private T name;
 
@@ -15,5 +15,10 @@ public class Register<T> {
 
     public String toString(){
         return "(" + key + ", " +name+ ")";
+    }
+
+    @Override
+    public int compareTo(Register<T> o) {
+        return 0;
     }
 }
