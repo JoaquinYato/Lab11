@@ -7,6 +7,7 @@ public class InterfazHashO extends JFrame {
 
     public InterfazHashO(int tamano) {
         this.hash = new HashO<>(tamano);
+        JOptionPane.showMessageDialog(this, "Tamaño ajustado al primo más cercano: " + hash.size);
 
         setTitle("Tabla Hash con Encadenamiento");
         setSize(600, 500);

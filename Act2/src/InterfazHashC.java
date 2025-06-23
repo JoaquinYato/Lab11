@@ -7,6 +7,7 @@ public class InterfazHashC extends JFrame {
 
     public InterfazHashC(int tamano) {
         this.hash = new HashC(tamano);
+        JOptionPane.showMessageDialog(this, "Tamaño ajustado al primo más cercano: " + hash.size);
 
         setTitle("Tabla Hash con Sondeo Lineal");
         setSize(600, 500);

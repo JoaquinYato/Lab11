@@ -3,12 +3,29 @@ public class HashO<T> {
     int size;
 
     public HashO(int size){
-        this.size=size;
-        this.table=new ListLinked[size];
+        this.size=siguientePrimo(size);
+        this.table=new ListLinked[this.size];
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < this.size; i++) {
             table[i] = new ListLinked<>();
         }
+    }
+
+    private static boolean esPrimo(int n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        return true;
+    }
+
+    private static int siguientePrimo(int n) {
+        while (!esPrimo(n)) {
+            n++;
+        }
+        return n;
     }
 
     private int hash(int key){
@@ -50,31 +67,29 @@ public class HashO<T> {
     }
 
     public void printTable(){
-        System.out.println("=== CONTENIDO DE LA TABLA HASH ===");
-        System.out.println("Tamaño de la tabla: " + size);
-        System.out.println("Índice | Elementos en la lista");
-        System.out.println("-------|----------------------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== CONTENIDO DE LA TABLA HASH ===\n");
+        sb.append("Tamaño de la tabla: ").append(size).append("\n");
+        sb.append("Índice | Elementos en la lista\n");
+        sb.append("-------|----------------------\n");
 
         for (int i = 0; i < size; i++) {
-            System.out.print(String.format("%6d | ", i));
+            sb.append(String.format("%6d | ", i));
+            ListLinked<Register<T>> lista = table[i];
 
-            if (table[i].isEmpty()) {
-                System.out.println("Lista vacía");
+            if (lista.isEmpty()) {
+                sb.append("Lista vacía\n");
             } else {
-                System.out.print("[");
-                boolean first = true;
-                ListLinked<Register<T>> lista = table[i];
+                sb.append("[");
                 for (int j = 0; j < lista.size(); j++) {
+                    if (j > 0) sb.append(" -> ");
                     Register<T> reg = lista.get(j);
-                    if (!first) {
-                        System.out.print(" -> ");
-                    }
-                    System.out.print("(" + reg.getKey() + ":" + reg.getName() + ")");
-                    first = false;
+                    sb.append("(").append(reg.getKey()).append(":").append(reg.getName()).append(")");
                 }
-                System.out.println("]");
+                sb.append("]\n");
             }
         }
-        System.out.println();
+
+        System.out.print(sb.toString());
     }
 }

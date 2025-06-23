@@ -14,12 +14,29 @@ public class HashC <T>{
     int size;
 
     public HashC(int size){
-        table= new Element[size];
-        this.size = size;
+        this.size = siguientePrimo(size);
+        this.table= new Element[this.size];
 
-        for(int i = 0; i < size; i++){
+        for(int i = 0; i < this.size; i++){
             table[i] = new Element();
         }
+    }
+
+    private static boolean esPrimo(int n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        return true;
+    }
+
+    private static int siguientePrimo(int n) {
+        while (!esPrimo(n)) {
+            n++;
+        }
+        return n;
     }
 
     private int hash(int key){
