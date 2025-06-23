@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
-public class HashO {
-    LinkedList<Register>[] table;
+public class HashO<T> {
+    LinkedList<Register<T>>[] table;
     int size;
 
     public HashO(int size){
@@ -9,7 +9,7 @@ public class HashO {
         this.table=new LinkedList[size];
 
         for (int i = 0; i < size; i++) {
-            table[i] = new LinkedList<Register>();
+            table[i] = new LinkedList<>();
         }
     }
 
@@ -17,13 +17,12 @@ public class HashO {
         return key%size;
     }
 
-    public void insert(Register reg){
+    public void insert(Register<T> reg){
         int index = hash(reg.getKey());
 
-        for(Register r : table[index]){
-            if(r.getKey()==reg.getKey()){
-                table[index].remove(r);
-                table[index].add(reg);
+        for(int i = 0; i < table[index].size(); i++){
+            if(table[index].get(i).getKey()==reg.getKey()){
+                table[index].set(i, reg);
                 return;
             }
         }
@@ -31,11 +30,11 @@ public class HashO {
         table[index].add(reg);
     }
 
-    public Register search(int key){
+    public Register<T> search(int key){
         int index = hash(key);
-        for(Register r : table[index]){
-            if(r.getKey()==key){
-                return r;
+        for(int  i = 0; i < table[index].size(); i++){
+            if(table[index].get(i).getKey()==key){
+                return table[index].get(i);
             }
         }
         return null;
@@ -44,9 +43,9 @@ public class HashO {
     public void delete(int key){
         int index = hash(key);
 
-        for(Register r : table[index]){
-            if(r.getKey()==key){
-                table[index].remove(r);
+        for(int i = 0; i < table[index].size(); i++){
+            if(table[index].get(i).getKey()==key){
+                table[index].remove(i);
                 return;
             }
         }
@@ -70,7 +69,7 @@ public class HashO {
                     if (!first) {
                         System.out.print(" -> ");
                     }
-                    System.out.print("(" + reg.getKey() + ":" + reg.getData() + ")");
+                    System.out.print("(" + reg.getKey() + ":" + reg.getName() + ")");
                     first = false;
                 }
                 System.out.println("]");

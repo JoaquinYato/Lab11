@@ -1,18 +1,19 @@
-public class Register {
+public class Register<T> {
     private int key;
-    private String name;
+    private T name;
 
-    public Register(int key, String name){
+    public Register(int key, T name){
         this.key=key;
         this.name=name;
     }
 
     public int getKey(){return key;}
 
-    public String getName(){return name;}
+    public void  setName(T name){this.name=name;}
+
+    public T getName() {return name;}
+
     public String toString(){
         return "(" + key + ", " +name+ ")";
     }
-
-    public String getData() {return name;}
 }

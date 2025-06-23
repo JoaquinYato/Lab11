@@ -59,7 +59,7 @@ public class InterfazHashC extends JFrame {
                 int clave = Integer.parseInt(claveStr.trim());
                 Register r = hash.search(clave);
                 if (r != null) {
-                    JOptionPane.showMessageDialog(this, "Encontrado: (" + r.getKey() + ":" + r.getData() + ")");
+                    JOptionPane.showMessageDialog(this, "Encontrado: (" + r.getKey() + ":" + r.getName() + ")");
                 } else {
                     JOptionPane.showMessageDialog(this, "Clave no encontrada.");
                 }
@@ -99,7 +99,7 @@ public class InterfazHashC extends JFrame {
                 sb.append(String.format("    %s     | %5d | %s\n",
                         disponible,
                         elem.register.getKey(),
-                        elem.register.getData()));
+                        elem.register.getName()));
             }
         }
 

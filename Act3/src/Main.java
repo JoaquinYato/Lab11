@@ -16,7 +16,7 @@ public class Main {
         // Buscar una clave
         Register buscado = tabla.search(6);
         if (buscado != null) {
-            System.out.println("Encontrado: (" + buscado.getKey() + ":" + buscado.getData() + ")");
+            System.out.println("Encontrado: (" + buscado.getKey() + ":" + buscado.getName() + ")");
         } else {
             System.out.println("No se encontró la clave 6");
         }

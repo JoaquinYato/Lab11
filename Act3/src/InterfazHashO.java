@@ -2,11 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InterfazHashO extends JFrame {
-    private HashO hash;
+    private HashO<String> hash;
     private JTextArea salida;
 
     public InterfazHashO(int tamano) {
-        this.hash = new HashO(tamano);
+        this.hash = new HashO<>(tamano);
 
         setTitle("Tabla Hash con Encadenamiento");
         setSize(600, 500);
@@ -41,14 +41,14 @@ public class InterfazHashO extends JFrame {
     private void insertar() {
         try {
             String claveStr = JOptionPane.showInputDialog(this, "Ingrese la clave (entero):");
-            String valor = JOptionPane.showInputDialog(this, "Ingrese el dato:");
+            String valor = JOptionPane.showInputDialog(this, "Ingrese el valor:");
             if (claveStr != null && valor != null) {
                 int clave = Integer.parseInt(claveStr.trim());
-                hash.insert(new Register(clave, valor.trim()));
+                hash.insert(new Register<>(clave, valor.trim()));
                 actualizarVista();
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Clave inválida.");
+            JOptionPane.showMessageDialog(this, "Clave inválida. Debe ser un número entero.");
         }
     }
 
@@ -57,9 +57,9 @@ public class InterfazHashO extends JFrame {
             String claveStr = JOptionPane.showInputDialog(this, "Ingrese la clave a buscar:");
             if (claveStr != null) {
                 int clave = Integer.parseInt(claveStr.trim());
-                Register r = hash.search(clave);
+                Register<String> r = hash.search(clave);
                 if (r != null) {
-                    JOptionPane.showMessageDialog(this, "Encontrado: (" + r.getKey() + ":" + r.getData() + ")");
+                    JOptionPane.showMessageDialog(this, "Encontrado: " + r);
                 } else {
                     JOptionPane.showMessageDialog(this, "Clave no encontrada.");
                 }
@@ -83,7 +83,6 @@ public class InterfazHashO extends JFrame {
     }
 
     private void actualizarVista() {
-        // Capturar la salida del método printTable() en el área de texto
         StringBuilder sb = new StringBuilder();
         sb.append("=== CONTENIDO DE LA TABLA HASH ===\n");
         sb.append("Tamaño de la tabla: ").append(hash.size).append("\n");
@@ -97,14 +96,15 @@ public class InterfazHashO extends JFrame {
             } else {
                 sb.append("[");
                 boolean primero = true;
-                for (Register r : hash.table[i]) {
+                for (Register<String> r : hash.table[i]) {
                     if (!primero) sb.append(" -> ");
-                    sb.append("(").append(r.getKey()).append(":").append(r.getData()).append(")");
+                    sb.append("(").append(r.getKey()).append(":").append(r.getName()).append(")");
                     primero = false;
                 }
                 sb.append("]\n");
             }
         }
+
         salida.setText(sb.toString());
     }
 

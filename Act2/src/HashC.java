@@ -1,6 +1,7 @@
-public class HashC {
-    static class Element{
-        Register register;
+public class HashC <T>{
+
+    class Element<T>{
+        Register<T> register;
         int isAvailable ;
 
         public Element(){
@@ -25,7 +26,7 @@ public class HashC {
         return key % size;
     }
 
-    public void insert(Register reg){
+    public void insert(Register<T> reg){
         int key = reg.getKey();
         int index = hash(key);
         int indexpOri = index;
@@ -40,16 +41,17 @@ public class HashC {
         } while (index != indexpOri);
     }
 
-    public Register search(int key){
+    public Register<T> search(int key){
         int index = hash(key);
         int indexpOri = index;
 
         do {
-            if (table[index].register != null && table[index].register.getKey() == key && table[index].isAvailable == 1) {
+            if ((table[index].isAvailable == 1 || table[index].isAvailable == -1) && table[index].register.getKey() == key) {
                 return table[index].register;
             }
+            if(table[index].isAvailable == 0) break;
             index = hash(index+1);
-        } while (index != indexpOri && table[index].register != null);
+        } while (index != indexpOri);
 
         return null;
     }
@@ -59,12 +61,13 @@ public class HashC {
         int indexpOri = index;
 
         do {
-            if (table[index].register != null && table[index].register.getKey() == key && table[index].isAvailable==1) {
+            if (table[index].isAvailable==1 && table[index].register.getKey() == key) {
                 table[index].isAvailable = -1;
+                table[index].register = null;
                 return;
             }
             index = hash(index+1);
-        } while (index != indexpOri && table[index].register != null);
+        } while (index != indexpOri);
     }
 
     public void printTable(){
