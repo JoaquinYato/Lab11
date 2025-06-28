@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InterfazHashC extends JFrame {
-    private HashC hash;
+    private HashC<String> hash;
     private JTextArea salida;
 
     public InterfazHashC(int tamano) {
-        this.hash = new HashC(tamano);
-        JOptionPane.showMessageDialog(this, "Tamaño ajustado al primo más cercano: " + hash.size);
+        this.hash = new HashC<>(tamano, new SondeoLineal());
+        JOptionPane.showMessageDialog(this, "Tamaño ajustado al primo más cercano: " + hash.getSize());
 
         setTitle("Tabla Hash con Sondeo Lineal");
         setSize(600, 500);
@@ -45,7 +45,7 @@ public class InterfazHashC extends JFrame {
             String valor = JOptionPane.showInputDialog(this, "Ingrese el dato:");
             if (claveStr != null && valor != null) {
                 int clave = Integer.parseInt(claveStr.trim());
-                hash.insert(new Register(clave, valor.trim()));
+                hash.insert(new Register<>(clave, valor.trim()));
                 actualizarVista();
             }
         } catch (NumberFormatException e) {
@@ -89,9 +89,9 @@ public class InterfazHashC extends JFrame {
         sb.append("Índice | Disponible | Clave | Datos\n");
         sb.append("-------|------------|-------|----------------\n");
 
-        for (int i = 0; i < hash.size; i++) {
+        for (int i = 0; i < hash.getSize(); i++) {
             sb.append(String.format("%6d | ", i));
-            HashC.Element elem = hash.table[i];
+            HashC.Element<String> elem = hash.getTable()[i];
 
             if (elem.register == null) {
                 sb.append("    SI     |   -   |   -\n");

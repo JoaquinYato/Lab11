@@ -1,7 +1,7 @@
 public class HashC<T> {
-    class Element {
+    public static class Element<T> {
         Register<T> register;
-        int isAvailable; // 0 libre, 1 ocupado, -1 borrado
+        int isAvailable;
 
         public Element() {
             this.register = null;
@@ -15,12 +15,20 @@ public class HashC<T> {
 
     public HashC(int size, Sondeo estrategia) {
         this.size = siguientePrimo(size);
-        this.table = new Element[this.size];
+        this.table = (Element<T>[]) new Element[this.size];
         this.estrategia = estrategia;
 
         for (int i = 0; i < this.size; i++) {
-            table[i] = new Element();
+            table[i] = new Element<T>();
         }
+    }
+
+    public Element<T>[] getTable() {
+        return table;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     private int hash(int key) {

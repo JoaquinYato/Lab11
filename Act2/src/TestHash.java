@@ -1,22 +1,23 @@
 public class TestHash {
     public static void main(String[] args) {
-        HashC hash = new HashC(13); // Usa tamaño primo para reducir colisiones
+        // Usa SondeoLineal, por ejemplo
+        HashC<String> hash = new HashC<>(13, new SondeoLineal());
 
-        Register[] registros = {
-                new Register(34, "Juan"),
-                new Register(3, "Ana"),
-                new Register(7, "Luis"),
-                new Register(30, "Sara"),
-                new Register(11, "Eva"),
-                new Register(8, "Pablo"),
-                new Register(7, "Mario"),   // Duplicada en clave (será reemplazada o ignorada)
-                new Register(23, "Laura"),
-                new Register(41, "Carlos"),
-                new Register(16, "Pedro"),
-                new Register(34, "Lucía")   // Duplicada en clave (igual que 34 anterior)
+        Register<String>[] registros = new Register[]{
+                new Register<>(34, "Juan"),
+                new Register<>(3, "Ana"),
+                new Register<>(7, "Luis"),
+                new Register<>(30, "Sara"),
+                new Register<>(11, "Eva"),
+                new Register<>(8, "Pablo"),
+                new Register<>(7, "Mario"),   // Clave duplicada
+                new Register<>(23, "Laura"),
+                new Register<>(41, "Carlos"),
+                new Register<>(16, "Pedro"),
+                new Register<>(34, "Lucía")   // Clave duplicada
         };
 
-        for (Register r : registros) {
+        for (Register<String> r : registros) {
             hash.insert(r);
         }
 
@@ -28,7 +29,7 @@ public class TestHash {
         hash.printTable();
 
         System.out.println("Buscando la clave 23...");
-        Register r = hash.search(23);
+        Register<String> r = hash.search(23);
         if (r != null) {
             System.out.println("Encontrado: " + r);
         } else {

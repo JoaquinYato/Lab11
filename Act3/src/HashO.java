@@ -1,6 +1,6 @@
 public class HashO<T> {
-    ListLinked<Register<T>>[] table;
-    int size;
+    public ListLinked<Register<T>>[] table;
+    public int size;
 
     public HashO(int size){
         this.size=siguientePrimo(size);
